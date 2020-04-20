@@ -32,6 +32,73 @@ public class Curso {
 		this.log = new Registro();
 	}
 	
+	
+
+	public Curso(Integer id, String nombre, Integer cicloLectivo, Integer cupo, List<Alumno> inscriptos,
+			Integer creditos, Integer creditosRequeridos, Registro log) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.cicloLectivo = cicloLectivo;
+		this.cupo = cupo;
+		this.inscriptos = inscriptos;
+		this.creditos = creditos;
+		this.creditosRequeridos = creditosRequeridos;
+		this.log = log;
+	}
+
+
+
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public Integer getCicloLectivo() {
+		return cicloLectivo;
+	}
+	public void setCicloLectivo(Integer cicloLectivo) {
+		this.cicloLectivo = cicloLectivo;
+	}
+	public Integer getCupo() {
+		return cupo;
+	}
+	public void setCupo(Integer cupo) {
+		this.cupo = cupo;
+	}
+	public List<Alumno> getInscriptos() {
+		return inscriptos;
+	}
+	public void setInscriptos(List<Alumno> inscriptos) {
+		this.inscriptos = inscriptos;
+	}
+	
+	public Integer getCreditos() {
+		return creditos;
+	}
+	public void setCreditos(Integer creditos) {
+		this.creditos = creditos;
+	}
+	public Integer getCreditosRequeridos() {
+		return creditosRequeridos;
+	}
+	public void setCreditosRequeridos(Integer creditosRequeridos) {
+		this.creditosRequeridos = creditosRequeridos;
+	}
+	public Registro getLog() {
+		return log;
+	}
+	public void setLog(Registro log) {
+		this.log = log;
+	}
+
 
 	/**
 	 * Este método, verifica si el alumno se puede inscribir y si es así lo agrega al curso,
