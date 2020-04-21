@@ -2,6 +2,8 @@ package died.guia06;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import died.guia06.util.Registro;
@@ -47,8 +49,6 @@ public class Curso {
 		this.log = log;
 	}
 
-
-
 	public Curso(Integer id, Integer creditos) {
 		super();
 		this.id = id;
@@ -57,55 +57,22 @@ public class Curso {
 
 
 
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public Integer getCicloLectivo() {
-		return cicloLectivo;
-	}
-	public void setCicloLectivo(Integer cicloLectivo) {
-		this.cicloLectivo = cicloLectivo;
-	}
-	public Integer getCupo() {
-		return cupo;
-	}
-	public void setCupo(Integer cupo) {
-		this.cupo = cupo;
-	}
-	public List<Alumno> getInscriptos() {
-		return inscriptos;
-	}
-	public void setInscriptos(List<Alumno> inscriptos) {
-		this.inscriptos = inscriptos;
-	}
-	
-	public Integer getCreditos() {
-		return creditos;
-	}
-	public void setCreditos(Integer creditos) {
-		this.creditos = creditos;
-	}
-	public Integer getCreditosRequeridos() {
-		return creditosRequeridos;
-	}
-	public void setCreditosRequeridos(Integer creditosRequeridos) {
-		this.creditosRequeridos = creditosRequeridos;
-	}
-	public Registro getLog() {
-		return log;
-	}
-	public void setLog(Registro log) {
-		this.log = log;
-	}
+	public Integer getId() {return id;}
+	public void setId(Integer id) {this.id = id;}
+	public String getNombre() {return nombre;}
+	public void setNombre(String nombre) {	this.nombre = nombre;}
+	public Integer getCicloLectivo() {return cicloLectivo;}
+	public void setCicloLectivo(Integer cicloLectivo) {this.cicloLectivo = cicloLectivo;}
+	public Integer getCupo() {return cupo;}
+	public void setCupo(Integer cupo) {this.cupo = cupo;}
+	public List<Alumno> getInscriptos() {return inscriptos;}
+	public void setInscriptos(List<Alumno> inscriptos) {this.inscriptos = inscriptos;}
+	public Integer getCreditos() {	return creditos;}
+	public void setCreditos(Integer creditos) {this.creditos = creditos;}
+	public Integer getCreditosRequeridos() {return creditosRequeridos;}
+	public void setCreditosRequeridos(Integer creditosRequeridos) {this.creditosRequeridos = creditosRequeridos;}
+	public Registro getLog() {return log;}
+	public void setLog(Registro log) {	this.log = log;}
 
 
 	/**
@@ -122,12 +89,39 @@ public class Curso {
 	 * @return
 	 */
 	public Boolean inscribir(Alumno a) {
-		try {
-		log.registrar(this, "inscribir ",a.toString());
-		return true;
-		}catch(IOException e) {
-			return false;
+		
+		
+		boolean soloTresCursos=true;
+		boolean exito=false;
+		for(int i=0;i<a.getCursando().size() && soloTresCursos;i++) {
+			int contadorCurso=0;//Si un ciclo lectivo se repite mas de tres veces soloTresCursos falso;
+			for(int j=0;j<a.getCursando().size();j++) {
+				if(a.getCursando().get(i).getId()!=a.getCursando().get(j).getId() //son distintos cursos y tienen mis ciclo lectivo 
+					&&	a.getCursando().get(i).cicloLectivo==a.getCursando().get(j).cicloLectivo) {
+				contadorCurso++;		
+				}
+				if(contadorCurso>=3) {soloTresCursos=false;}
+				
+			}
+			
+			
 		}
+	
+		if(this.getCreditosRequeridos()>=a.creditosObtenidos() && this.getCupo()>0 && soloTresCursos) {
+			
+			a.inscripcionAceptada(this);
+			this.getInscriptos().add(a);
+		exito=true;	
+		}
+		
+		
+		try {	
+		log.registrar(this, "inscribir ",a.toString());
+		}catch(IOException e) {
+			System.out.println("La operacion no pudo ser registrada");
+		}
+		
+		return exito;
 	}
 	
 	
@@ -135,10 +129,16 @@ public class Curso {
 	 * imprime los inscriptos en orden alfabetico
 	 */
 	public void imprimirInscriptos() {
+		
+		Collections.sort(inscriptos);
+		
+		System.out.println(inscriptos);
+		
+		
 		try {
 		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
 		}catch(IOException e){ 
-			System.out.println("No fue posible imprimir inscriptos");
+			System.out.println("La operacion no pudo ser registrada");
 			
 		}
 		}
