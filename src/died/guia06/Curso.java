@@ -54,6 +54,18 @@ public class Curso {
 		this.id = id;
 		this.creditos = creditos;
 	}
+	
+
+
+
+	public Curso(Integer id, Integer cupo, Integer creditosRequeridos) {
+		super();
+		this.id = id;
+		this.cupo = cupo;
+		this.creditosRequeridos = creditosRequeridos;
+		this.inscriptos=new ArrayList<Alumno>();
+		this.log = new Registro();
+	}
 
 
 
@@ -93,25 +105,23 @@ public class Curso {
 		
 		boolean soloTresCursos=true;
 		boolean exito=false;
-		for(int i=0;i<a.getCursando().size() && soloTresCursos;i++) {
+		
+		for(int i=0;i<a.getCursando().size();i++) {
 			int contadorCurso=0;//Si un ciclo lectivo se repite mas de tres veces soloTresCursos falso;
 			for(int j=0;j<a.getCursando().size();j++) {
 				if(a.getCursando().get(i).getId()!=a.getCursando().get(j).getId() //son distintos cursos y tienen mis ciclo lectivo 
 					&&	a.getCursando().get(i).cicloLectivo==a.getCursando().get(j).cicloLectivo) {
 				contadorCurso++;		
 				}
-				if(contadorCurso>=3) {soloTresCursos=false;}
-				
 			}
 			
-			
+			if(contadorCurso>=3) {soloTresCursos=false;}
 		}
 	
-		if(this.getCreditosRequeridos()>=a.creditosObtenidos() && this.getCupo()>0 && soloTresCursos) {
-			
+		if(this.getCreditosRequeridos()<=a.creditosObtenidos() && this.getCupo()>0 && soloTresCursos) {
 			a.inscripcionAceptada(this);
 			this.getInscriptos().add(a);
-		exito=true;	
+		    exito=true;	
 		}
 		
 		
@@ -130,9 +140,9 @@ public class Curso {
 	 */
 	public void imprimirInscriptos() {
 		
-		Collections.sort(inscriptos);
+		Collections.sort(this.getInscriptos());
 		
-		System.out.println(inscriptos);
+		System.out.println(this.getInscriptos());
 		
 		
 		try {

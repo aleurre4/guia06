@@ -42,7 +42,6 @@ class AlumnoTest {
 	@Test
 	void testAprobar() {
 		a1.aprobar(c1);
-		
 		boolean esperado1 = a1.getAprobados().contains(c1);
 		boolean esperado2 = !a1.getCursando().contains(c1);
 		assertTrue(esperado1 && esperado2);
