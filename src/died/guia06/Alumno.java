@@ -25,13 +25,31 @@ public class Alumno implements Comparable<Alumno>{
 	
 	
 	
+	public Integer getNroLibreta() {
+		return nroLibreta;
+	}
+	public void setNroLibreta(Integer nroLibreta) {
+		this.nroLibreta = nroLibreta;
+	}
+	public List<Curso> getCursando() {
+		return cursando;
+	}
+	public void setCursando(List<Curso> cursando) {
+		this.cursando = cursando;
+	}
+	public List<Curso> getAprobados() {
+		return aprobados;
+	}
+	public void setAprobados(List<Curso> aprobados) {
+		this.aprobados = aprobados;
+	}
 	public int creditosObtenidos() {
 	    
 		int creditos=0;
 		
 		for(int i=0;i<aprobados.size();i++) {
 		
-			creditos=creditos + aprobados.get(i).getCreditos();
+			creditos=creditos + (int) aprobados.get(i).getCreditos();
 			
 		}
 		return creditos;

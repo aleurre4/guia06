@@ -49,6 +49,14 @@ public class Curso {
 
 
 
+	public Curso(Integer id, Integer creditos) {
+		super();
+		this.id = id;
+		this.creditos = creditos;
+	}
+
+
+
 	public Integer getId() {
 		return id;
 	}
