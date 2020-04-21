@@ -43,13 +43,14 @@ public class Alumno implements Comparable<Alumno>{
 	public void setAprobados(List<Curso> aprobados) {
 		this.aprobados = aprobados;
 	}
+
+	
+	
 	@Override
 	public String toString() {
-		return "Alumno [nombre=" + nombre + ", nroLibreta=" + nroLibreta + "]";
+		return "Alumno [nombre=" + nombre + ", nroLibreta=" + nroLibreta + ", cursando=" + cursando + ", aprobados="
+				+ aprobados + "]";
 	}
-	
-	
-	
 	public int creditosObtenidos() {
 	    
 		int creditos=0;

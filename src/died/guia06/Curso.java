@@ -87,6 +87,16 @@ public class Curso {
 	public void setLog(Registro log) {	this.log = log;}
 
 
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Curso [nombre=" + nombre + ", cicloLectivo=" + cicloLectivo + "]";
+	}
+
+
+
 	/**
 	 * Este método, verifica si el alumno se puede inscribir y si es así lo agrega al curso,
 	 * agrega el curso a la lista de cursos en los que está inscripto el alumno y retorna verdadero.
@@ -100,21 +110,21 @@ public class Curso {
 	 * @param a
 	 * @return
 	 */
+	
+	
 	public Boolean inscribir(Alumno a) {
 		
 		
 		boolean soloTresCursos=true;
 		boolean exito=false;
 		
-		for(int i=0;i<a.getCursando().size();i++) {
+		for(int i=0;i<a.getCursando().size() && soloTresCursos;i++) {
 			int contadorCurso=0;//Si un ciclo lectivo se repite mas de tres veces soloTresCursos falso;
 			for(int j=0;j<a.getCursando().size();j++) {
-				if(a.getCursando().get(i).getId()!=a.getCursando().get(j).getId() //son distintos cursos y tienen mis ciclo lectivo 
-					&&	a.getCursando().get(i).cicloLectivo==a.getCursando().get(j).cicloLectivo) {
+				if(a.getCursando().get(i).cicloLectivo==a.getCursando().get(j).cicloLectivo) {
 				contadorCurso++;		
 				}
 			}
-			
 			if(contadorCurso>=3) {soloTresCursos=false;}
 		}
 	

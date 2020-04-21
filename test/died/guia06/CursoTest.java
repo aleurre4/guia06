@@ -62,6 +62,7 @@ class CursoTest {
 		c1.inscribir(a3);
 		c1.imprimirInscriptos();
 	
+	
 	}
 
 }
