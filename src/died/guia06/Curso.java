@@ -112,7 +112,7 @@ public class Curso {
 	 */
 	
 	
-	public Boolean inscribir(Alumno a) {
+	public Boolean inscribir(Alumno a) throws No_Creditos_Requeridos,Sin_cupos,Ya_posee_ciclo_regular,RegistroAuditoriaException {
 		
 		
 		boolean soloTresCursos=true;
@@ -130,15 +130,33 @@ public class Curso {
 	
 		if(this.getCreditosRequeridos()<=a.creditosObtenidos() && this.getCupo()>0 && soloTresCursos) {
 			a.inscripcionAceptada(this);
+			this.cupo=this.getCupo()-1;
 			this.getInscriptos().add(a);
 		    exito=true;	
 		}
+		else if(this.getCreditosRequeridos()>=a.creditosObtenidos()) {
+			
+			throw new No_Creditos_Requeridos("El alumno no tiene los creditos requeridos para inscribirse al curso");
+			
+		}
+	 if(this.getCupo()==0) {
+			
+			throw new Sin_cupos("El curso no tiene cupos disponibles");
+			
+		}
+	 if(!soloTresCursos) {
+		
+		throw new Ya_posee_ciclo_regular("El alumno ya esta cursando tres materias del ciclo regular");
+		
+	}
+		
+		
 		
 		
 		try {	
 		log.registrar(this, "inscribir ",a.toString());
 		}catch(IOException e) {
-			System.out.println("La operacion no pudo ser registrada");
+			throw new RegistroAuditoriaException("La operacion no pudo ser registrada");
 		}
 		
 		return exito;
@@ -165,3 +183,52 @@ public class Curso {
 
 
 }
+
+class No_Creditos_Requeridos extends RuntimeException{
+ 
+	public No_Creditos_Requeridos() {}
+	
+	public No_Creditos_Requeridos(String mensaje) {
+		
+		super(mensaje);
+		
+		
+	}}
+	class Sin_cupos extends RuntimeException{
+		 
+		public Sin_cupos() {}
+		
+		public Sin_cupos(String mensaje) {
+			
+			super(mensaje);
+			
+			
+		}}
+	
+class Ya_posee_ciclo_regular extends RuntimeException{
+		 
+		public Ya_posee_ciclo_regular() {}
+		
+		public Ya_posee_ciclo_regular(String mensaje) {
+			
+			super(mensaje);
+			
+			
+		}}
+
+class RegistroAuditoriaException extends RuntimeException{
+	 
+	public RegistroAuditoriaException() {}
+	
+	public RegistroAuditoriaException(String mensaje) {
+		
+		super(mensaje);
+		
+		
+	}}
+
+
+
+	
+	
+	
