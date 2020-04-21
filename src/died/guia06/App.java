@@ -46,7 +46,7 @@ public class App {
 	    c3=new Curso(3, "AMI", 1, 6, alumnos,4, 1,buff);
 	    c4=new Curso(4, "Fisica I", 1, 6, alumnos,5, 1,buff);
 	    c5=new Curso(5, "AEDD", 1, 6, alumnos,4, 1,buff);
-	    c6=new Curso(6, "Taller", 1, 6, alumnos,9, 4,buff);
+	    c6=new Curso(6, "Taller", 1, 0, alumnos,9, 4,buff);
 	    curso1.add(c5);
 	    curso3.add(c5);
 	    curso4.add(c5);
@@ -65,10 +65,26 @@ public class App {
 		a4=new Alumno("Alejandro", 123 ,curso2, aprobadas4);
 	
 		c1.inscribir(a1);
+		
 		c1.inscribir(a2);
-		c1.inscribir(a3);
-	    c1.inscribir(a4);
-	
+		
+		try{
+			c1.inscribir(a3);
+			}catch(No_Creditos_Requeridos e) {
+				System.out.println(e.getMessage());
+			
+		}
+	    try {
+		c1.inscribir(a4);
+	    }catch(Ya_posee_ciclo_regular e){
+	    	System.out.println(e.getMessage());
+	    	
+	    }
+	    try {
+			c6.inscribir(a1);
+		    }catch(Sin_cupos e){
+		    	System.out.println(e.getMessage());
+		    }
 	
 	
 	
